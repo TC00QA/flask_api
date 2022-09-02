@@ -1,13 +1,10 @@
 version: "3.8"
 
 services:
-  
-  front-end:
 
-    build: ./front-end
-    
-    depends_on:
-      - back-end
+  time-api:
+
+    build: ./time-api
 
   back-end:
 
@@ -16,9 +13,12 @@ services:
     depends_on:
       - time-api
 
-  time-api:
+  front-end:
 
-    build: ./time-api
+    build: ./front-end
+    
+    depends_on:
+      - back-end
 
   nginx:
     
