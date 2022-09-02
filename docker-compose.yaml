@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  
+  front-end:
+
+    build: ./front-end
+    
+    depends_on:
+      - back-end
+
+  back-end:
+
+    build: ./back-end
+
+    depends_on:
+      - time-api
+
+  time-api:
+
+    build: ./time-api
+
+  nginx:
+    
+    ports:
+    - target: 80
+      published: 80
+      protocol: tcp  
+    
+    image: nginx:latest
+    
+    volumes:
+    - type: bind
+      source: ./nginx/nginx.conf
+      target: /etc/nginx/nginx.conf
+    
+    depends_on:
+      - front-end
